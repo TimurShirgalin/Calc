@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_text">35sp</dimen>
+    <dimen name="textView_mergin">10dp</dimen>
+    <dimen name="textView_textSize">60sp</dimen>
+    <dimen name="button_18_width">288dp</dimen>
+</resources>
