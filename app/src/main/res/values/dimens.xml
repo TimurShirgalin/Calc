@@ -2,6 +2,7 @@
 <resources>
     <dimen name="button_text">35sp</dimen>
     <dimen name="textView_mergin">10dp</dimen>
-    <dimen name="textView_textSize">60sp</dimen>
+    <dimen name="textView_textSize">50sp</dimen>
     <dimen name="button_18_width">288dp</dimen>
+    <dimen name="marginTop">25dp</dimen>
 </resources>
