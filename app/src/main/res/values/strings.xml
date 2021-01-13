@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Calc</string>
+    <string name="button_1_text">1</string>
+    <string name="button_2_text">2</string>
+    <string name="button_3_text">3</string>
+    <string name="button_4_text">+</string>
+    <string name="button_5_text">4</string>
+    <string name="button_6_text">5</string>
+    <string name="button_7_text">6</string>
+    <string name="button_8_text">-</string>
+    <string name="button_9_text">7</string>
+    <string name="button_10_text">8</string>
+    <string name="button_11_text">9</string>
+    <string name="button_12_text">x</string>
+    <string name="button_13_text">,</string>
+    <string name="button_14_text">0</string>
+    <string name="button_15_text">del</string>
+    <string name="button_16_text">/</string>
+    <string name="button_17_text">C</string>
+    <string name="button_18_text">=</string>
 </resources>
