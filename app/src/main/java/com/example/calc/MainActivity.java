@@ -5,12 +5,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String keyOperations = "Operations";
     public TextView textView;
     private Operations operations = new Operations();
-    private int which_button = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +26,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         digits(view);
         switch (view.getId()) {
             case R.id.button_4:     //сложить
-                do_operation();
+                doOperation();
                 operations.setIdentify_operation(1);
                 break;
             case R.id.button_8:     //вычесть
-                do_operation();
+                doOperation();
                 operations.setIdentify_operation(2);
                 break;
             case R.id.button_12:     //умножить
-                do_operation();
+                doOperation();
                 operations.setIdentify_operation(3);
                 break;
             case R.id.button_15:     //backSpace
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.button_16:     //разделить
-                do_operation();
+                doOperation();
                 operations.setIdentify_operation(4);
                 break;
             case R.id.button_17:
@@ -52,24 +53,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setNumber2();
                 operations.result();
                 textView.setText(Double.toString(operations.getResult()));
-                which_button = 2;
+                operations.setWhichButton(2);
                 break;
         }
     }
 
-    private void do_operation() {
-        if (which_button != 1) {
+    private void doOperation() {
+        if (operations.getWhichButton() != 1) {
             if (operations.getSet() == 1) {
                 setNumber1();
             } else {
                 setNumber2();
-                if (which_button != 55) {
+                if (operations.getWhichButton() != 55) {
                     operations.result();
                     textView.setText(Double.toString(operations.getResult()));
                 }
             }
         }
-        which_button = 1;
+        operations.setWhichButton(1);
     }
 
     private void setNumber1() {
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void check() {
-        switch (which_button) {
+        switch (operations.getWhichButton()) {
             case 0:
                 break;
             case 2:
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             default:
                 textView.setText(null);
-                which_button = 0;
+                operations.setWhichButton(0);
                 break;
         }
     }
@@ -195,7 +196,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         operations.setResult(0);
         operations.setSet(1);
         operations.setIdentify_operation(0);
-        which_button = 0;
+        operations.setWhichButton(0);
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        operations = (Operations) savedInstanceState.getParcelable(keyOperations);
+        setCurrentDigital();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        operations.setCurrentDigital(textView.getText().toString());
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(keyOperations, operations);
+    }
+
+    private void setCurrentDigital() {
+        textView.setText(operations.getCurrentDigital());
+    }
 }
