@@ -1,16 +1,58 @@
 package com.example.calc;
 
-class Operations {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+class Operations implements Parcelable {
+    static final Creator<Operations> CREATOR = new Creator<Operations>() {
+        @Override
+        public Operations createFromParcel(Parcel in) {
+            return new Operations(in);
+        }
+
+        @Override
+        public Operations[] newArray(int size) {
+            return new Operations[size];
+        }
+    };
     private double number1;
     private double number2;
     private double result;
     private int set = 1;
     private int identify_operation;
+    private int whichButton = 0;
+    private String currentDigital;
 
     Operations() {
         number1 = 0;
         number2 = 0;
         result = 0;
+    }
+
+    protected Operations(Parcel in) {
+        number1 = in.readDouble();
+        number2 = in.readDouble();
+        result = in.readDouble();
+        set = in.readInt();
+        identify_operation = in.readInt();
+        whichButton = in.readInt();
+        currentDigital = in.readString();
+    }
+
+    public String getCurrentDigital() {
+        return currentDigital;
+    }
+
+    public void setCurrentDigital(String currentDigital) {
+        this.currentDigital = currentDigital;
+    }
+
+    public int getWhichButton() {
+        return whichButton;
+    }
+
+    public void setWhichButton(int whichButton) {
+        this.whichButton = whichButton;
     }
 
     public void setNumber1(double number1) {
@@ -83,5 +125,19 @@ class Operations {
         number1 = result;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(number1);
+        dest.writeDouble(number2);
+        dest.writeDouble(result);
+        dest.writeInt(set);
+        dest.writeInt(identify_operation);
+        dest.writeInt(whichButton);
+        dest.writeString(currentDigital);
+    }
 }
