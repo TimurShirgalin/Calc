@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Calc" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Calc" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -12,5 +12,36 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="srcCompat">@drawable/calc</item>
     </style>
+
+    <style name="Buttons" parent="Theme.MaterialComponents.DayNight">
+        <item name="android:textSize">@dimen/button_text</item>
+        <item name="android:backgroundTint">@color/blue</item>
+        <item name="cornerRadius">@dimen/corner_Radius</item>
+    </style>
+
+    <style name="ButtonsOther" parent="Buttons">
+        <item name="android:backgroundTint">@color/blue_light</item>
+    </style>
+
+    <style name="ButtonLandscape" parent="Buttons">
+        <item name="android:textSize">@dimen/button_text_land</item>
+    </style>
+
+    <style name="ButtonLandscapeOther" parent="ButtonLandscape">
+        <item name="android:backgroundTint">@color/blue_light</item>
+    </style>
+
+    <style name="ButtonC" parent="Buttons">
+        <item name="android:backgroundTint">@color/red</item>
+    </style>
+
+    <style name="text_View" parent="Theme.MaterialComponents.DayNight">
+        <item name="android:ellipsize">none</item>
+        <item name="android:gravity">right</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/textView_textSize</item>
+    </style>
+
 </resources>
