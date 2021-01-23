@@ -2,8 +2,10 @@
 <resources>
     <dimen name="button_text">35sp</dimen>
     <dimen name="button_text_land">30sp</dimen>
-    <dimen name="textView_mergin">10dp</dimen>
+    <dimen name="textView_margin">10dp</dimen>
     <dimen name="textView_textSize">50sp</dimen>
     <dimen name="button_18_width">0dp</dimen>
     <dimen name="marginTop">15dp</dimen>
+    <dimen name="stroke_Width">1dp</dimen>
+    <dimen name="corner_Radius">12dp</dimen>
 </resources>

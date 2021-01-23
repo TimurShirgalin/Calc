@@ -18,4 +18,5 @@
     <string name="button_16_text">/</string>
     <string name="button_17_text">C</string>
     <string name="button_18_text">=</string>
+    <string name="switch_text">Dark mode</string>
 </resources>

@@ -3,12 +3,15 @@ package com.example.calc;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     private static final String keyOperations = "Operations";
     public TextView textView;
     private Operations operations = new Operations();
@@ -18,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.textView);
+        SwitchCompat onOffSwitch = findViewById(R.id.switch1);
+        switchOnOff(onOffSwitch);
         initButtons();
     }
 
@@ -215,5 +220,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setCurrentDigital() {
         textView.setText(operations.getCurrentDigital());
+    }
+
+    private void switchOnOff(SwitchCompat onOffSwitch) {
+        onOffSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                } else {
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                }
+            }
+        });
     }
 }
