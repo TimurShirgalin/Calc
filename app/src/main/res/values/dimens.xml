@@ -8,4 +8,5 @@
     <dimen name="marginTop">15dp</dimen>
     <dimen name="stroke_Width">1dp</dimen>
     <dimen name="corner_Radius">12dp</dimen>
+    <dimen name="button_Set_textSize">12sp</dimen>
 </resources>

@@ -19,4 +19,7 @@
     <string name="button_17_text">C</string>
     <string name="button_18_text">=</string>
     <string name="switch_text">Dark mode</string>
+    <string name="button_Back">Back</string>
+    <string name="button_Set_text">Settings</string>
+    <string name="name_switch_theme">Switch Theme</string>
 </resources>

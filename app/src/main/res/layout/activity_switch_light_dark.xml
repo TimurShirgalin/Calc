@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_Back_id"
+        style="@style/Buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marginTop"
+        android:layout_marginTop="@dimen/marginTop"
+        android:text="@string/button_Back" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_switch"
+        style="@style/Buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marginTop"
+        android:layout_marginTop="@dimen/marginTop"
+        android:text="@string/name_switch_theme" />
+
+</LinearLayout>

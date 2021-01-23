@@ -1,18 +1,21 @@
 package com.example.calc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.SwitchCompat;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import static java.lang.Double.parseDouble;
 
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, Constant {
     private static final String keyOperations = "Operations";
+    private static final int REQUEST_CODE = 11;
     public TextView textView;
     private Operations operations = new Operations();
 
@@ -21,14 +24,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.textView);
-        SwitchCompat onOffSwitch = findViewById(R.id.switch1);
-        switchOnOff(onOffSwitch);
         initButtons();
+        Button button = findViewById(R.id.button_19);
+        button.setOnClickListener(v -> {
+            Intent settings = new Intent(MainActivity.this, SwitchLightDark.class);
+            settings.putExtra(CODE_SETTINGS, getDelegate().getLocalNightMode());
+            startActivityForResult(settings, REQUEST_CODE);
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode != REQUEST_CODE) {
+            super.onActivityResult(requestCode, resultCode, data);
+            return;
+        }
+        if (resultCode == RESULT_OK) {
+            operations.setCode(data.getExtras().getInt(CODE_SETTINGS));
+            if (data.getExtras().getInt(CODE_SETTINGS) == 2) {
+                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+        }
     }
 
     @Override
     public void onClick(View view) {
-        digits(view);
         switch (view.getId()) {
             case R.id.button_4:     //сложить
                 doOperation();
@@ -60,6 +82,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textView.setText(Double.toString(operations.getResult()));
                 operations.setWhichButton(2);
                 break;
+            default:
+                check();
+                textView.append(((Button) view).getText().toString());
+                break;
         }
     }
 
@@ -69,10 +95,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setNumber1();
             } else {
                 setNumber2();
-                if (operations.getWhichButton() != 55) {
-                    operations.result();
-                    textView.setText(Double.toString(operations.getResult()));
-                }
+                operations.result();
+                textView.setText(Double.toString(operations.getResult()));
             }
         }
         operations.setWhichButton(1);
@@ -80,13 +104,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setNumber1() {
         if (!textView.getText().toString().equals("")) {
-            operations.setNumber1(Double.parseDouble(textView.getText().toString()));
+            operations.setNumber1(parseDouble(textView.getText().toString()));
         }
     }
 
     private void setNumber2() {
         if (!textView.getText().toString().equals("")) {
-            operations.setNumber2(Double.parseDouble(textView.getText().toString()));
+            operations.setNumber2(parseDouble(textView.getText().toString()));
         }
     }
 
@@ -104,94 +128,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void digits(View view) {
-        switch (view.getId()) {
-            case R.id.button_1:
-                check();
-                textView.append("1");
-                break;
-            case R.id.button_2:
-                check();
-                textView.append("2");
-                break;
-            case R.id.button_3:
-                check();
-                textView.append("3");
-                break;
-            case R.id.button_5:
-                check();
-                textView.append("4");
-                break;
-            case R.id.button_6:
-                check();
-                textView.append("5");
-                break;
-            case R.id.button_7:
-                check();
-                textView.append("6");
-                break;
-            case R.id.button_9:
-                check();
-                textView.append("7");
-                break;
-            case R.id.button_10:
-                check();
-                textView.append("8");
-                break;
-            case R.id.button_11:
-                check();
-                textView.append("9");
-                break;
-            case R.id.button_13:
-                check();
-                if (!textView.getText().toString().contains(".")) {
-                    textView.append(".");
-                }
-                break;
-            case R.id.button_14:
-                check();
-                textView.append("0");
-                break;
-        }
-    }
-
     private void initButtons() {
-        Button button1 = findViewById(R.id.button_1);
-        Button button2 = findViewById(R.id.button_2);
-        Button button3 = findViewById(R.id.button_3);
-        Button button4 = findViewById(R.id.button_4);
-        Button button5 = findViewById(R.id.button_5);
-        Button button6 = findViewById(R.id.button_6);
-        Button button7 = findViewById(R.id.button_7);
-        Button button8 = findViewById(R.id.button_8);
-        Button button9 = findViewById(R.id.button_9);
-        Button button10 = findViewById(R.id.button_10);
-        Button button11 = findViewById(R.id.button_11);
-        Button button12 = findViewById(R.id.button_12);
-        Button button13 = findViewById(R.id.button_13);
-        Button button14 = findViewById(R.id.button_14);
-        Button button15 = findViewById(R.id.button_15);
-        Button button16 = findViewById(R.id.button_16);
-        Button button17 = findViewById(R.id.button_17);
-        Button button18 = findViewById(R.id.button_18);
-        button1.setOnClickListener(this);
-        button2.setOnClickListener(this);
-        button3.setOnClickListener(this);
-        button4.setOnClickListener(this);
-        button5.setOnClickListener(this);
-        button6.setOnClickListener(this);
-        button7.setOnClickListener(this);
-        button8.setOnClickListener(this);
-        button9.setOnClickListener(this);
-        button10.setOnClickListener(this);
-        button11.setOnClickListener(this);
-        button12.setOnClickListener(this);
-        button13.setOnClickListener(this);
-        button14.setOnClickListener(this);
-        button15.setOnClickListener(this);
-        button16.setOnClickListener(this);
-        button17.setOnClickListener(this);
-        button18.setOnClickListener(this);
+        View[] but = new View[]{findViewById(R.id.button_1), findViewById(R.id.button_2), findViewById(R.id.button_3), findViewById(R.id.button_4), findViewById(R.id.button_5),
+                findViewById(R.id.button_6), findViewById(R.id.button_7), findViewById(R.id.button_8), findViewById(R.id.button_9), findViewById(R.id.button_10),
+                findViewById(R.id.button_11), findViewById(R.id.button_12), findViewById(R.id.button_13), findViewById(R.id.button_14),
+                findViewById(R.id.button_15), findViewById(R.id.button_16), findViewById(R.id.button_17), findViewById(R.id.button_18)};
+        for (View view : but) {
+            view.setOnClickListener(this);
+        }
     }
 
     private void erase() {
@@ -220,19 +164,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setCurrentDigital() {
         textView.setText(operations.getCurrentDigital());
-    }
-
-    private void switchOnOff(SwitchCompat onOffSwitch) {
-        onOffSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                } else {
-                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                }
-            }
-        });
     }
 }

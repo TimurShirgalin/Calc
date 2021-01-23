@@ -41,7 +41,16 @@
         <item name="android:ellipsize">none</item>
         <item name="android:gravity">right</item>
         <item name="android:singleLine">true</item>
+        <item name="android:maxLength">13</item>
         <item name="android:textSize">@dimen/textView_textSize</item>
+    </style>
+
+    <style name="ButtonSettings" parent="Theme.MaterialComponents.DayNight">
+        <item name="android:textSize">@dimen/button_Set_textSize</item>
+        <item name="cornerFamilyBottomRight">cut</item>
+        <item name="cornerFamilyTopLeft">cut</item>
+        <item name="shapeAppearance">@style/ButtonSettings</item>
+        <item name="cornerRadius">@dimen/corner_Radius</item>
     </style>
 
 </resources>

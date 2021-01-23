@@ -22,11 +22,9 @@ class Operations implements Parcelable {
     private int identify_operation;
     private int whichButton = 0;
     private String currentDigital;
+    private int code = 1;
 
     Operations() {
-        number1 = 0;
-        number2 = 0;
-        result = 0;
     }
 
     protected Operations(Parcel in) {
@@ -37,6 +35,15 @@ class Operations implements Parcelable {
         identify_operation = in.readInt();
         whichButton = in.readInt();
         currentDigital = in.readString();
+        code = in.readInt();
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getCurrentDigital() {
@@ -139,5 +146,6 @@ class Operations implements Parcelable {
         dest.writeInt(identify_operation);
         dest.writeInt(whichButton);
         dest.writeString(currentDigital);
+        dest.writeInt(code);
     }
 }
